@@ -1,0 +1,61 @@
+KONTRORA — READY-TO-COPY COMPLETE SOURCE + ESTIMATES NAVIGATION
+================================================================
+
+THIS ARCHIVE IS FULL SOURCE, not only a patch. It reconstructs the client's
+original 7z source and the changes exchanged in the conversation, including
+Estimate APIs, tables/migrations, UI, tests, and navigational buttons.
+
+VERY IMPORTANT BEFORE COPYING
+- Back up your CURRENT WORKING local project folder.
+- Keep the .env.local file from YOUR WORKING project. This ZIP intentionally
+  contains NO .env.local, service-role key, credentials, or test JWTs.
+- Your current folder may contain additional edits not supplied in chat.
+  Compare them before overwriting. The ZIP cannot include unknown local edits.
+- Do NOT copy the archive's root folder *into* the existing folder to produce
+  full-stack-assignment/full-stack-assignment/full-stack-assignment nesting.
+  Open the extracted full-stack-assignment folder and copy its CONTENTS.
+
+COPY AND RUN (Windows)
+1. Stop npm run dev (Ctrl+C).
+2. Back up the entire working full-stack-assignment project.
+3. Extract this ZIP. Open the EXTRACTED full-stack-assignment folder.
+4. Copy everything inside it into the ROOT of your working project, alongside
+   package.json. Choose Merge/Replace for project source files. Do NOT delete
+   your existing .env.local. Ignore .next and node_modules.
+5. Confirm .env.local is still there, with your original private credentials.
+6. From the working project root:
+     npm install
+     node scripts/verify-estimates-layout.cjs
+     npm test -- __tests__/estimate-money.test.ts
+     npm run dev
+7. Browser http://localhost:3000/login — log in as demo Account Manager.
+8. LEFT SIDEBAR -> Estimates -> select Meridian Financial Group -> View Estimates.
+   ALTERNATIVELY: Accounts -> View Estimates on the account card;
+   OR Accounts -> View Details -> View Estimates on the account header.
+9. View existing estimate, Create Draft, Edit Draft, Mark Sent.
+10. As Executive Director, open the SAME account's Sent estimate -> Accept or
+    Reject. You cannot undo a decision; create another draft for the other path.
+
+The already-configured developer Supabase should NOT have base SQL or seed
+users run again. If supabase/estimates-currency-guard.sql was not applied yet,
+review it and run it ONCE in your dev project's SQL Editor.
+
+SECURITY / CLIENT DELIVERY
+- APIs check auth and financial account permission; finance writes use the
+  locked, authenticated database functions, never a service-role backend API.
+- The app is not a production security-certified deployment. Original base
+  schema contains unrelated legacy permissions that still need an audit.
+- Before delivering to the client, run npm run lint, npm run build, and the
+  cross-tenant smoke tests described in README-ESTIMATES.md.
+- DO NOT zip node_modules, .next, .env.local, secrets, or private tokens.
+- Actual live test of the NEW status transitions still needs to be performed.
+
+FOLDER LOCATIONS (DO NOT MIX API AND PAGE ROUTES)
+  app/api/accounts/[accountId]/estimates/route.ts
+  app/api/accounts/[accountId]/estimates/[estimateId]/route.ts
+  app/api/accounts/[accountId]/estimates/[estimateId]/transition/route.ts
+  app/accounts/[accountId]/estimates/page.tsx
+  app/estimates/page.tsx             <---- SIDEBAR ACCOUNT PICKER
+  components/account-list.tsx       <---- VIEW ESTIMATES CARD BUTTON
+  components/account-overview.tsx   <---- VIEW ESTIMATES HEADER BUTTON
+  components/sidebar/sidebar-navigation.tsx  <---- ESTIMATES SIDEBAR LINK

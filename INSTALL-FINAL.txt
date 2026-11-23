@@ -1,0 +1,52 @@
+KONTRORA ESTIMATES — FINAL FEATURE PACKAGE
+==========================================
+
+Your current local app already has the working Estimates List/Create/Details UI.
+Do NOT delete your working project or its .env.local file.
+
+SAFE PATCH INSTALLATION (RECOMMENDED):
+1. Stop Next.js (Ctrl+C) and BACK UP your local full-stack-assignment folder.
+2. Extract Kontrora_Estimates_FINAL_PATCH.zip.
+3. Copy the extracted app, components, lib, __tests__, tests, supabase, scripts and
+   README-ESTIMATES.md into the EXISTING project root. Choose Merge/Replace
+   for the matching Estimates files only. Other modules do not need replacing.
+4. Keep your own .env.local! Do not expose secrets or place them in any ZIP.
+5. The original 'estimates.sql' migration was already executed in Supabase.
+   Run ONLY the NEW supabase/estimates-currency-guard.sql in SQL Editor.
+   (Do not rerun schema.sql, seed-roles.sql, or seed:users just for this update.)
+6. In terminal from the project root:
+      node scripts/verify-estimates-layout.cjs
+      npm test -- __tests__/estimate-money.test.ts
+      npm run dev
+7. Visit:
+   http://localhost:3000/accounts/aaaaaaaa-aaaa-aaaa-aaaa-000000000001/estimates
+8. Account Manager: open Draft -> Edit Draft -> Save -> Mark Sent.
+9. Logout -> Executive Director -> same account -> View Sent -> Accept/Reject.
+   For a separate reject test, create and Send a NEW draft; terminal decisions
+   cannot be reversed.
+10. Test authorization with tests/estimates-authorization-smoke.sql on your
+    isolated Supabase assignment project (see README-ESTIMATES.md).
+
+IMPORTANT URL/FOLDER RULE:
+  API      app/api/accounts/[accountId]/estimates/route.ts
+  API      app/api/accounts/[accountId]/estimates/[estimateId]/route.ts
+  API      app/api/accounts/[accountId]/estimates/[estimateId]/transition/route.ts
+  FRONTEND app/accounts/[accountId]/estimates/page.tsx
+
+Never put page.tsx inside an app/api/.../estimates directory.
+If you created a stray app/api/[accountId]/estimates folder earlier, remove
+only that stray folder AFTER checking it has no other working code.
+
+FULL PROJECT ZIP:
+Kontrora_COMPLETE_SOURCE_With_Estimates.zip reconstructs the codebase from
+THE CLIENT'S ORIGINAL 7z plus the fixes discussed in this conversation and
+these final Estimates features. It does not contain your real Supabase
+credentials or any changes made locally but NOT shared in this chat. For
+current work, merging the FINAL_PATCH is safer than replacing the whole app.
+
+WHAT'S VERIFIED:
+- Previously in your environment: List GET, Create POST HTTP 201, Details GET,
+  frontend list/form and correct database totals.
+- In this package: syntax transpilation and standalone money/status assertions.
+- NOT verified remotely: live PATCH/status transitions, full npm build, and
+  cross-account Supabase integration tests. Test these before client delivery.
